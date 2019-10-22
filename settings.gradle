@@ -1,7 +1,8 @@
-rootProject.name = project_name
+rootProject.name = 'Agility'
 include 'app'
 include 'api'
+include 'data'
+include 'common'
 include 'domain'
 include 'webapp'
-include 'data'
 

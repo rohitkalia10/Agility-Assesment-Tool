@@ -1,6 +1,16 @@
-description "data"
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
-    compile project(":domain")
-    
+//    compile project (":domain")
+
+//    compile libraries.spring.aop
+//    compile libraries.spring.actuator
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

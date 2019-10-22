@@ -1,5 +1,8 @@
-package agility.model;
+package agility.data.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @EntityScan
@@ -31,6 +34,7 @@ public class Answer implements Serializable  {
 	}
 
 	// Getters and setters
+
 
 	public String getUserId() {
 		return userId;

@@ -1,11 +1,9 @@
-package agility.model;
-
-import javax.persistence.*;
+package agility.data.model;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 
 @EntityScan

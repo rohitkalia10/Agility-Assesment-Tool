@@ -1,8 +1,15 @@
 package agility.controller;
 
+import agility.data.model.Answer;
+import agility.data.model.Question;
+import agility.data.model.User;
+import agility.domain.services.AnswerDao;
+import agility.domain.services.QuestionDao;
+import agility.domain.services.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,12 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.agility.model.Answer;
-import com.agility.model.Question;
-import com.agility.model.User;
-import com.agility.repo.AnswerDao;
-import com.agility.repo.QuestionDao;
-import com.agility.repo.UserDao;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,10 +31,14 @@ public class AgilityController {
 
     @Autowired
     private UserDao userDao;
+
     @Autowired
     private QuestionDao questionDao;
+
     @Autowired
     private AnswerDao answerDao;
+
+
 
     @Value("${welcome.message}")
     private String message;

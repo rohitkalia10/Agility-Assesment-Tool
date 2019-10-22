@@ -2,11 +2,13 @@ import java.time.format.DateTimeFormatter
 import java.time.ZonedDateTime
 
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
 
 description 'Spring boot application'
 
 springBoot {
-    mainClassName  = 'agility.lifecyle.AgilityApplication'
+    mainClassName = 'agility.lifecyle.AgilityApplication'
 }
 
 bootRun {
@@ -20,17 +22,19 @@ repositories {
     maven { url "https://repo.spring.io/milestone" }
 }
 
+
 dependencies {
     compile project(':app')
     compile project(':api')
+    compile project(':domain')
     compile project(':data')
 
-//    runtime ('org.springframework.boot:sprint-boot-starter-undertow')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 task createCheckpointFile {
     doLast {
-        def checkpoint = "AgilityAssesmentTool-${project.version}"
+        def checkpoint = "AgilityTool-${project.version}"
         println "Checkpoint = ${checkpoint}"
         def TODAY_DT_US = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yy hh:mm:ss a z"))
         String fileContent = "BUILD_CHECKPOINT: ${checkpoint}\nBUILD TSTAMP: ${TODAY_DT_US} \nBUILD_DTR: ${projectDir}"
@@ -39,10 +43,10 @@ task createCheckpointFile {
 }
 
 jar {
-    from file("${buildDir}/springbootagilitytool.checkpoint")
+    from file("${buildDir}/springbootagility.checkpoint")
     baseName = "agility"
     manifest {
-        attributes("Implementation-Title": "AgilityAssesmentTool",
+        attributes("Implementation-Title": "AgilityTool",
             "Implementation-Version": "${project.version}")
     }
 }
@@ -55,7 +59,7 @@ war {
     from file("${buildDir}/springbootmicroservicetemplate.checkpoint")
     baseName = "springbootmicroservicetemplate"
     manifest {
-        attributes("Implementation-Title": "MicroserviceTemplate",
+        attributes("Implementation-Title": "AgilityTool",
                 "Implementation-Version": "${project.version}")
     }
 }

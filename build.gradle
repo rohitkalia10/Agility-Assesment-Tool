@@ -1,13 +1,13 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.7.RELEASE'
-		springDepManVers = '1.0.8.RELEASE'
+		springBootVersion = '2.1.2.RELEASE'
+		springDepManVers = '1.0.6.RELEASE'
 	}
 	repositories {
 		mavenLocal()
 		mavenCentral()
-//		maven { url "https://repo.spring.io/snapshot" }
-//		maven { url "https://repo.spring.io/milestone" }
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
 
 	}
 	dependencies {
@@ -16,6 +16,7 @@ buildscript {
 		classpath ("org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.33")
 	}
 }
+
 
 allprojects{
 
@@ -49,5 +50,24 @@ gradle.beforeProject {prj ->
 	}
 }
 
+//task dist(type: Zip, dependsOn: [':webapp.war']) {
+//	description 'Create a zip file containing the webapp war and all env bundles.'
+//	archiveName = 'springbootmicroservicetemplate.zip'
+//	destinationDir = file("$rootDir"/build)
+//	from("$rootDir/webapp/build/libs") {
+//		include("**/*.war")
+//	}
+//}
 
+/*
 
+group = 'com.springboot.microservice.template'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+*/

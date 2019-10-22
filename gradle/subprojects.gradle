@@ -2,25 +2,26 @@ subprojects {
     apply plugin: 'java'
     if (!project.name.equals('webapp')) {
     apply plugin: "io.spring.dependency-management"
-//    dependencyManagement {
-//      imports {
-//        // https://github.com/spring-projects/spring-boot/blob/master/spring-boot-dependencies/pom.xml
-////        mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.2.RELEASE")
-//          mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-//      }
-//    }
+    dependencyManagement {
+      imports {
+        // https://github.com/spring-projects/spring-boot/blob/master/spring-boot-dependencies/pom.xml
+        mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.2.RELEASE")
+      }
+    }
     dependencies {
-        compile('org.springframework.boot:spring-boot-starter-web')
-        compile('org.springframework.boot:spring-boot-starter-actuator')
-        compile ("org.springframework.boot:spring-boot-starter-data-jpa")
-        compile("com.h2database:h2")
-        testCompile('org.springframework.boot:spring-boot-starter-test')
+        compile ('org.springframework.boot:spring-boot-starter-actuator')
+        compile ('org.springframework.boot:spring-boot-starter-web')
+        compile ('org.springframework.boot:spring-boot-starter-data-jpa')
+        compile ('org.springframework.boot:spring-boot-starter-data-rest')
+        compile ('org.springframework.boot:spring-boot-starter-thymeleaf')
+        compile ('com.h2database:h2')
+//      compile('org.springframework.boot:spring-boot-starter-log4j2')
     }
   }
 
     jar {
         manifest {
-            attributes("Implementation-Title": "AgilityAssesmentTool",
+            attributes("Implementation-Title": "AgilityTool",
                     "Implementation-Version": "${project.version}")
         }
     }

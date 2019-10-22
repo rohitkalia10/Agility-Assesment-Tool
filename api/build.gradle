@@ -1,9 +1,16 @@
-description "api"
+description "Agility API Build"
 
-apply plugin: 'jsonschema2pojo'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
-    compile "org.jsonschema2pojo:jsonschema2pojo-gradle-plugin"
+//    compile "org.jsonschema2pojo:jsonschema2pojo-gradle-plugin"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 
@@ -24,22 +31,23 @@ ext {
         apiTargetDir = "$apiTargetDir"
     }
     generatedJavaSourceDir = "src/main/java"
-    }
+}
 
 clean{
     delete generatedJavaSourceDir
 }
 
-jsonSchema2Pojo{
-    source = files("${projectDir}/src/main/resources/agility/api/schema")
-    targetDirectory = file("${generatedJavaSourceDir}")
-    targetPackage = 'agility.api'
-    includeJsr303Annotations = true
-    includeConstructors = true
-    //inclusionLevel = InclusionLevel.NON_EMPTY;
-    propertyWordDelimiters = ['_'] as char[]
-    annotationStyle = 'jackson2'
-    dateTimeType = "java.time.Instant"
-    dateType = "java.time.LocalDate"
-    timeType = "java.time.LocalTime"
-}
+//jsonSchema2Pojo{
+//    source = files("${projectDir}/src/main/resources/springbootmicroservicetemplate/api/schema")
+//    targetDirectory = file("${generatedJavaSourceDir}")
+//    targetPackage = 'springbootmicroservicetemplate.api'
+//    includeJsr303Annotations = true
+//    includeConstructors = true
+//    //inclusionLevel = InclusionLevel.NON_EMPTY;
+//    propertyWordDelimiters = ['_'] as char[]
+//    annotationStyle = 'jackson2'
+//    dateTimeType = "java.time.Instant"
+//    dateType = "java.time.LocalDate"
+//    timeType = "java.time.LocalTime"
+//}
+
