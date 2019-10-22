@@ -1,7 +1,6 @@
 package agility.domain.services;
 
 import agility.data.model.User;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

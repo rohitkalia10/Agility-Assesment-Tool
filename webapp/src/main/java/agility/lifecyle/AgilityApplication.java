@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@ComponentScan(basePackages = {"agility"})
+@ComponentScan(basePackages = {"com.agility"})
+@EntityScan(basePackages = {"com.agility.domain.dao"})
 @SpringBootApplication
 public class AgilityApplication extends SpringBootServletInitializer {
 

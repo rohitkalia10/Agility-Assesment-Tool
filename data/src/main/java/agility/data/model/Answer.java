@@ -18,6 +18,8 @@ public class Answer implements Serializable  {
 	private String tCode;
 	private String qCode;
 	private String answers;
+	private String submission;
+
 
 	@OneToOne
 	@JoinColumn(name = "userId", referencedColumnName = "uid", updatable=false,insertable=false)
@@ -66,5 +68,13 @@ public class Answer implements Serializable  {
 
 	public void setAnswers(String answers) {
 		this.answers = answers;
+	}
+
+	public String getSubmission() {
+		return submission;
+	}
+
+	public void setSubmission(String submission) {
+		this.submission = submission;
 	}
 }

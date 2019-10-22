@@ -20,7 +20,6 @@ import java.util.Set;
 
 	private String typeCode;
 	private String questionCode;
-	@Column(unique = true)
 	private String question;
     private String typeName;
 
