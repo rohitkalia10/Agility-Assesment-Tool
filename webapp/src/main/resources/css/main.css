@@ -1,0 +1,28 @@
+body {
+  padding-top: 2rem;
+  font-size: 150%;
+}
+.navbar {
+  background-color: #F6C115;
+  color: #C1F615;
+  line-height: 70px;
+  background-image: none;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+h1{
+	color:#0000FF;
+}
+
+h2{
+	color:#FF0000;
+}
+ol{
+    color:#0000FF;
+    text-align: left;
+    font-size: 90%;
+    margin-left: 30%;
+}

@@ -1,0 +1,45 @@
+description "api"
+
+apply plugin: 'jsonschema2pojo'
+
+dependencies {
+    compile "org.jsonschema2pojo:jsonschema2pojo-gradle-plugin"
+}
+
+
+configurations {
+    compile.exclude group: 'com.google.android'
+}
+
+ext {
+    if(!project.hasProperty('apiSourceDir')) {
+        apiSourceDir = null
+    } else {
+        apiSourceDir = "$apiSourceDir"
+    }
+
+    if(!project.hasProperty('apiTargetDir')) {
+        apiTargetDir = null
+    } else {
+        apiTargetDir = "$apiTargetDir"
+    }
+    generatedJavaSourceDir = "src/main/java"
+    }
+
+clean{
+    delete generatedJavaSourceDir
+}
+
+jsonSchema2Pojo{
+    source = files("${projectDir}/src/main/resources/agility/api/schema")
+    targetDirectory = file("${generatedJavaSourceDir}")
+    targetPackage = 'agility.api'
+    includeJsr303Annotations = true
+    includeConstructors = true
+    //inclusionLevel = InclusionLevel.NON_EMPTY;
+    propertyWordDelimiters = ['_'] as char[]
+    annotationStyle = 'jackson2'
+    dateTimeType = "java.time.Instant"
+    dateType = "java.time.LocalDate"
+    timeType = "java.time.LocalTime"
+}

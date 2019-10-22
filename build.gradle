@@ -1,0 +1,53 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.7.RELEASE'
+		springDepManVers = '1.0.8.RELEASE'
+	}
+	repositories {
+		mavenLocal()
+		mavenCentral()
+//		maven { url "https://repo.spring.io/snapshot" }
+//		maven { url "https://repo.spring.io/milestone" }
+
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath ("io.spring.gradle:dependency-management-plugin:${springDepManVers}")
+		classpath ("org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.33")
+	}
+}
+
+allprojects{
+
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'idea'
+	ext {
+		genSrcDir = "$buildDir/generated-src/main/java"
+	}
+	idea{
+		module{ downloadSources = true}
+	}
+
+	project.group = project_group
+
+	if(!project.hasProperty('buildNumber')){
+		project.version = project_version + "-SNAPSHOT"
+	} else {
+		project.version = project_version + "-${buildNumber}"
+	}
+
+}
+
+apply from: 'gradle/subprojects.gradle'
+
+gradle.beforeProject {prj ->
+	if(!project.hasProperty('buildNumber')) {
+		prj.version = project_version + "-SNAPSHOT"
+	} else {
+		prj.version = project_version + "-${buildNumber}"
+	}
+}
+
+
+
