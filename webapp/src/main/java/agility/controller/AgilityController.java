@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import services.FindService;
 
 
 import java.util.Arrays;
@@ -29,7 +30,10 @@ public class AgilityController {
     private static Logger logger = LoggerFactory.getLogger(AgilityController.class);
 
     @Autowired
-    private UserDao userDao;
+    private FindService findService;
+
+//    @Autowired
+//    private UserDao userDao;
 
     @Autowired
     private QuestionDao questionDao;
@@ -63,24 +67,24 @@ public class AgilityController {
         return new HttpEntity<String>(msg, headers);
     }
 
-    @GetMapping( value = "/api/agility/V1/getUser/{uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Optional<User> getUser(@PathVariable("uid") String uid) {
+//    @GetMapping( value = "/api/agility/V1/getUser/{uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public Optional<User> getUser(@PathVariable("uid") String uid) {
 
 
-        logger.info("getUser entered: uid= " + uid);
+//        logger.info("getUser entered: uid= " + uid);
 
-        Optional<User> user = userDao.findById(uid);
+//        Optional<User> user = userDao.findById(uid);
 
-        return user;
-    }
+//        return user;
+//    }
 
     @GetMapping(value = "/api/agility/V1/getUsers", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Iterable<User> getUsers() {
 
         logger.info("findAll USERS entered...");
 
-        return userDao.findAll();
+        return findService.findAll();
     }
 
     @GetMapping(value = "/api/agility/V1/getQuestions", consumes = MediaType.APPLICATION_JSON_VALUE)

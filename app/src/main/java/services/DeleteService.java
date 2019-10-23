@@ -1,4 +1,4 @@
-package agility.domain.services;
+package services;
 
 @FunctionalInterface
 public interface DeleteService {
