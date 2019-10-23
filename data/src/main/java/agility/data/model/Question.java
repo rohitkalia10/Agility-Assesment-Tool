@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-@EntityScan
+//@EntityScan
 @Entity
 //@Table(name = "question", uniqueConstraints=
 //@UniqueConstraint(columnNames = {"typeCode", "questionCode"}))

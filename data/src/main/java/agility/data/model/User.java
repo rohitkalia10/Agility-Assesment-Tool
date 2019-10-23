@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@EntityScan
+//@EntityScan
 @Entity
 @Table(name = "user")
 
