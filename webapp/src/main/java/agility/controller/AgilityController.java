@@ -3,8 +3,9 @@ package agility.controller;
 import agility.data.model.Answer;
 import agility.data.model.Question;
 import agility.data.model.User;
-import agility.domain.repository.AnswerDao;
-import agility.domain.repository.QuestionDao;
+import agility.data.repository.AnswerDao;
+import agility.data.repository.QuestionDao;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import services.UserService;
+import agility.services.FindService;
 
 
 import java.util.Arrays;
@@ -23,13 +25,13 @@ import java.util.List;
 import java.util.Optional;
 
 //@CrossOrigin(origins = "*")
-@Controller
+@RestController
 public class AgilityController {
 
     private static Logger logger = LoggerFactory.getLogger(AgilityController.class);
 
     @Autowired
-    private UserService userService;
+    private FindService findService;
 
 //    @Autowired
 //    private UserDao userDao;
@@ -75,15 +77,15 @@ public class AgilityController {
 
 //        Optional<User> user = userDao.findById(uid);
 
-        return userService.findUserById(uid);
+        return findService.findUserById(uid);
     }
 
-    @GetMapping(value = "/api/agility/V1/getUsers", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Iterable<User> getUsers() {
+    @GetMapping( "/api/agility/V1/getUsers")
+    public ResponseEntity getUsers() {
 
         logger.info("findAll USERS entered...");
 
-        return userService.findAllUsers();
+        return findService.findAllUsers();
     }
 
     @GetMapping(value = "/api/agility/V1/getQuestions", consumes = MediaType.APPLICATION_JSON_VALUE)

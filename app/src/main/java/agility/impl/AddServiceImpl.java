@@ -1,6 +1,6 @@
 package agility.impl;
 
-import services.AddService;
+import agility.services.AddService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,4 +1,6 @@
 subprojects {
+    apply from: "$rootDir/gradle/dependencies.gradle"
+    
     apply plugin: 'java'
     if (!project.name.equals('webapp')) {
     apply plugin: "io.spring.dependency-management"
@@ -15,6 +17,7 @@ subprojects {
         compile ('org.springframework.boot:spring-boot-starter-data-rest')
         compile ('org.springframework.boot:spring-boot-starter-thymeleaf')
         compile ('com.h2database:h2')
+//        compile ('org.jsonschema2pojo:jsonschema2pojo-gradle-plugin')
 //      compile('org.springframework.boot:spring-boot-starter-log4j2')
     }
   }

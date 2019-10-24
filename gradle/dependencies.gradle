@@ -1,0 +1,6 @@
+ext {
+    versions = [:]
+    libraries = [:]
+}
+
+libraries.jsonschema2pojo = "org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.33"

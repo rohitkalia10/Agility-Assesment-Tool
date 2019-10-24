@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "uid": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "submit": {
+      "type": "string"
+    },
+    "userRole": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "uid",
+    "email",
+    "firstName",
+    "lastName",
+    "submit",
+    "userRole"
+  ]
+}

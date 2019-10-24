@@ -1,7 +1,7 @@
-package services;
+package agility.services;
 
 @FunctionalInterface
-public interface AddService {
+public interface DeleteService {
 
     String getResponse(String request);
 }
