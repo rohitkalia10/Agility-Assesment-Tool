@@ -5,7 +5,6 @@ import agility.data.model.Question;
 import agility.data.model.User;
 import agility.domain.repository.AnswerDao;
 import agility.domain.repository.QuestionDao;
-import agility.domain.repository.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import services.FindService;
+import services.UserService;
 
 
 import java.util.Arrays;
@@ -30,7 +29,7 @@ public class AgilityController {
     private static Logger logger = LoggerFactory.getLogger(AgilityController.class);
 
     @Autowired
-    private FindService findService;
+    private UserService userService;
 
 //    @Autowired
 //    private UserDao userDao;
@@ -67,24 +66,24 @@ public class AgilityController {
         return new HttpEntity<String>(msg, headers);
     }
 
-//    @GetMapping( value = "/api/agility/V1/getUser/{uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public Optional<User> getUser(@PathVariable("uid") String uid) {
+    @GetMapping( value = "/api/agility/V1/getUser/{uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Optional<User> getUser(@PathVariable("uid") String uid) {
 
 
-//        logger.info("getUser entered: uid= " + uid);
+        logger.info("getUser entered: uid= " + uid);
 
 //        Optional<User> user = userDao.findById(uid);
 
-//        return user;
-//    }
+        return userService.findUserById(uid);
+    }
 
     @GetMapping(value = "/api/agility/V1/getUsers", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Iterable<User> getUsers() {
 
         logger.info("findAll USERS entered...");
 
-        return findService.findAll();
+        return userService.findAllUsers();
     }
 
     @GetMapping(value = "/api/agility/V1/getQuestions", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -103,16 +102,16 @@ public class AgilityController {
         return answerDao.findAll();
     }
 
-    @PostMapping(value = "/api/agility/V1/saveUser", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public User saveUser(@RequestBody User u) {
-
-        logger.info("saveUser entered...");
-
-        User newUser = new User();
-        newUser = userDao.save(u);
-        return newUser;
-    }
+//    @PostMapping(value = "/api/agility/V1/saveUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public User saveUser(@RequestBody User u) {
+//
+//        logger.info("saveUser entered...");
+//
+//        User newUser = new User();
+//        newUser = userDao.save(u);
+//        return newUser;
+//    }
 
     @PostMapping(value = "/api/agility/V1/saveQuestion", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
