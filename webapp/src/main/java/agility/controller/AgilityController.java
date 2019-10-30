@@ -21,6 +21,7 @@ import agility.services.FindService;
 
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,6 +96,15 @@ public class AgilityController {
         return findService.findAllQuestions();
     }
 
+    @GetMapping( "/api/agility/V1/getQuestion/{tCode}")
+    @ResponseBody
+    public ResponseEntity getQuestions(@PathVariable("tCode") String tCode) {
+
+        logger.info("getQuestions entered: type code= " + tCode);
+
+        return findService.findQuestionsById(tCode);
+    }
+
     @GetMapping("/api/agility/V1/getAnswers")
     @ResponseBody
     public ResponseEntity getAnswers() {
@@ -117,7 +127,7 @@ public class AgilityController {
 
 
 
-//    @PostMapping(value = "/api/agility/V1/saveUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @PostMapping("/api/agility/V1/saveUser")
 //    @ResponseBody
 //    public User saveUser(@RequestBody User u) {
 //

@@ -16,15 +16,14 @@ import org.springframework.stereotype.Service;
 import agility.services.FindService;
 
 import javax.xml.ws.Response;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FindServiceImpl implements FindService {
 
     @Autowired
     private UserDao userDao;
+
     @Autowired
     private QuestionDao questionDao;
 
@@ -70,9 +69,7 @@ public class FindServiceImpl implements FindService {
 
     @Override
     public ResponseEntity findAllQuestions() {
-
         Iterable<Question> questions = questionDao.findAll();
-
         List responses = new ArrayList<>();
         questions.forEach(questionl -> {
             ShowQuestionResponse response = new ShowQuestionResponse();
@@ -81,6 +78,19 @@ public class FindServiceImpl implements FindService {
             response.setTypeCode(questionl.getTypeCode());
             response.setTypeName(questionl.getTypeName());
             responses.add(response);
+        });
+        return new ResponseEntity(responses, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity findQuestionsById(String tCode) {
+
+        List<Question> questions = questionDao.findByTypeCode(tCode);
+        List responses = new ArrayList();
+        questions.forEach(questionl -> {
+            ShowQuestionResponse qResponse = new ShowQuestionResponse();
+            qResponse.setQuestion(questionl.getQuestion());
+            responses.add(qResponse);
         });
         return new ResponseEntity(responses, HttpStatus.OK);
     }
