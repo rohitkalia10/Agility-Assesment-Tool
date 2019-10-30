@@ -10,8 +10,9 @@ import java.util.Optional;
 
 public interface FindService {
     public ResponseEntity findAllUsers();
-    public Optional<User> findUserById(String s);
-    public Iterable<Question> findAllQuestions();
-    public Optional<Question> findQuestionById(String s);
+    public ResponseEntity findUserById(String s);
+    public ResponseEntity findAllQuestions();
+//    public ResponseEntity findQuestionsById(String s);
+    public ResponseEntity findAllAnswers();
 
 }

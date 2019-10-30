@@ -36,11 +36,11 @@ public class AgilityController {
 //    @Autowired
 //    private UserDao userDao;
 
-    @Autowired
-    private QuestionDao questionDao;
+//    @Autowired
+//    private QuestionDao questionDao;
 
-    @Autowired
-    private AnswerDao answerDao;
+//    @Autowired
+//    private AnswerDao answerDao;
 
     @Value("${welcome.message}")
     private String message;
@@ -68,19 +68,17 @@ public class AgilityController {
         return new HttpEntity<String>(msg, headers);
     }
 
-    @GetMapping( value = "/api/agility/V1/getUser/{uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping( "/api/agility/V1/getUser/{uid}")
     @ResponseBody
-    public Optional<User> getUser(@PathVariable("uid") String uid) {
-
+    public ResponseEntity getUser(@PathVariable("uid") String uid) {
 
         logger.info("getUser entered: uid= " + uid);
-
-//        Optional<User> user = userDao.findById(uid);
 
         return findService.findUserById(uid);
     }
 
     @GetMapping( "/api/agility/V1/getUsers")
+    @ResponseBody
     public ResponseEntity getUsers() {
 
         logger.info("findAll USERS entered...");
@@ -88,21 +86,36 @@ public class AgilityController {
         return findService.findAllUsers();
     }
 
-    @GetMapping(value = "/api/agility/V1/getQuestions", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Iterable<Question> getQuestions() {
+    @GetMapping("/api/agility/V1/getQuestions")
+    @ResponseBody
+    public ResponseEntity getQuestions() {
 
         logger.info("findAll QUESTIONS entered...");
 
-        return questionDao.findAll();
+        return findService.findAllQuestions();
     }
 
-    @GetMapping(value = "/api/agility/V1/getAnswers", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Iterable<Answer> getAnswers() {
+    @GetMapping("/api/agility/V1/getAnswers")
+    @ResponseBody
+    public ResponseEntity getAnswers() {
 
         logger.info("findAll Answers entered...");
 
-        return answerDao.findAll();
+        return findService.findAllAnswers();
     }
+
+//    @PostMapping(value = "/api/agility/V1/saveQuestion", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public Question saveQuestion(@RequestBody Question q) {
+//
+//        logger.info("saveQuestion entered...");
+//
+//        Question question = new Question();
+//        question = questionDao.save(question);
+//        return question;
+//    }
+
+
 
 //    @PostMapping(value = "/api/agility/V1/saveUser", consumes = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseBody
@@ -115,25 +128,16 @@ public class AgilityController {
 //        return newUser;
 //    }
 
-    @PostMapping(value = "/api/agility/V1/saveQuestion", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Question saveQuestion(@RequestBody Question q) {
 
-        logger.info("saveQuestion entered...");
 
-        Question question = new Question();
-        question = questionDao.save(question);
-        return question;
-    }
-
-    @PostMapping(value = "/api/agility/V1/saveAnswer", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Answer saveAnswer(@RequestBody Answer a) {
-
-        logger.info("saveAnswer entered...");
-
-        Answer answer = new Answer();
-        answer = answerDao.save(answer);
-        return answer;
-    }
+//    @PostMapping(value = "/api/agility/V1/saveAnswer", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public Answer saveAnswer(@RequestBody Answer a) {
+//
+//        logger.info("saveAnswer entered...");
+//
+//        Answer answer = new Answer();
+//        answer = answerDao.save(answer);
+//        return answer;
+//    }
 }

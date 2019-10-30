@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string"
+    },
+    "tCode": {
+      "type": "string"
+    },
+    "qCode": {
+      "type": "string"
+    },
+    "answers": {
+      "type": "string"
+    },
+    "submission": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "userId",
+    "tCode",
+    "qCode",
+    "answers",
+    "submission"
+  ]
+}

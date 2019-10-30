@@ -20,13 +20,5 @@
     "userRole": {
       "type": "string"
     }
-  },
-  "required": [
-    "uid",
-    "email",
-    "firstName",
-    "lastName",
-    "submit",
-    "userRole"
-  ]
+  }
 }

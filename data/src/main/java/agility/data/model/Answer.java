@@ -10,10 +10,9 @@ import java.io.Serializable;
 @Table(name = "answer")
 public class Answer implements Serializable  {
 
-
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	private long id;
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
 	private String userId;
 	private String tCode;
 	private String qCode;

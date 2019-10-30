@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "tCode": {
+      "type": "string"
+    },
+    "qCode": {
+      "type": "string"
+    },
+    "answers": {
+      "type": "string"
+    },
+    "submission": {
+      "type": "string"
+    }
+  }
+}
