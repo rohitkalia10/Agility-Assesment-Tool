@@ -56,7 +56,6 @@ public class FindServiceImpl implements FindService {
     public ResponseEntity findUserById(String uid) {
 
         Optional<User> user = userDao.findById(uid);
-//        List responses = new ArrayList<>();
         ShowUserResponse response = new ShowUserResponse();
             response.setUid(user.get().getUid());
             response.setFirstName(user.get().getFirstName());

@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 //@EntityScan
 @Entity
@@ -24,8 +25,8 @@ import java.io.Serializable;
 	private String userRole;
 	private String submit;
 
-	@OneToOne(mappedBy = "user")
-	private Answer answer;
+	@OneToMany(mappedBy = "user")
+	private Set<Answer> answer;
 
 // Getters and setters
 

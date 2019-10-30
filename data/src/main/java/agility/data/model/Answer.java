@@ -20,7 +20,7 @@ public class Answer implements Serializable  {
 	private String submission;
 
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "userId", referencedColumnName = "uid", updatable=false,insertable=false)
 	private User user;
 
