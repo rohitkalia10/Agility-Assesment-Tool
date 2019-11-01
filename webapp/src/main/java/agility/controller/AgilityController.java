@@ -1,10 +1,12 @@
 package agility.controller;
 
+import agility.api.AddUpdateUserRequest;
 import agility.data.model.Answer;
 import agility.data.model.Question;
 import agility.data.model.User;
 import agility.data.repository.AnswerDao;
 import agility.data.repository.QuestionDao;
+import agility.services.AddService;
 import org.codehaus.jackson.map.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import agility.services.FindService;
 
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -34,14 +37,8 @@ public class AgilityController {
     @Autowired
     private FindService findService;
 
-//    @Autowired
-//    private UserDao userDao;
-
-//    @Autowired
-//    private QuestionDao questionDao;
-
-//    @Autowired
-//    private AnswerDao answerDao;
+    @Autowired
+    private AddService addService;
 
     @Value("${welcome.message}")
     private String message;
@@ -114,6 +111,15 @@ public class AgilityController {
         return findService.findAllAnswers();
     }
 
+    @PostMapping("/api/agility/V1/saveUser")
+    @ResponseBody
+    public ResponseEntity saveUser(@Valid @RequestBody final AddUpdateUserRequest request) {
+
+        logger.info("saveUser entered...");
+
+        return addService.addUser(request);
+    }
+
 //    @PostMapping(value = "/api/agility/V1/saveQuestion", consumes = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseBody
 //    public Question saveQuestion(@RequestBody Question q) {
@@ -123,19 +129,6 @@ public class AgilityController {
 //        Question question = new Question();
 //        question = questionDao.save(question);
 //        return question;
-//    }
-
-
-
-//    @PostMapping("/api/agility/V1/saveUser")
-//    @ResponseBody
-//    public User saveUser(@RequestBody User u) {
-//
-//        logger.info("saveUser entered...");
-//
-//        User newUser = new User();
-//        newUser = userDao.save(u);
-//        return newUser;
 //    }
 
 
