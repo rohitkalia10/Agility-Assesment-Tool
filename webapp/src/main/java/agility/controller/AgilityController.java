@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 //@CrossOrigin(origins = "*")
-@RestController
+@Controller
 public class AgilityController {
 
     private static Logger logger = LoggerFactory.getLogger(AgilityController.class);
@@ -66,7 +66,7 @@ public class AgilityController {
         return new HttpEntity<String>(msg, headers);
     }
 
-    @GetMapping( "/api/agility/V1/getUser/{uid}")
+    @GetMapping( value = "/api/agility/V1/getUser/{uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getUser(@PathVariable("uid") String uid) {
 
@@ -75,7 +75,7 @@ public class AgilityController {
         return findService.findUserById(uid);
     }
 
-    @GetMapping( "/api/agility/V1/getUsers")
+    @GetMapping( value = "/api/agility/V1/getUsers", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getUsers() {
 
@@ -84,7 +84,7 @@ public class AgilityController {
         return findService.findAllUsers();
     }
 
-    @GetMapping("/api/agility/V1/getQuestions")
+    @GetMapping(value = "/api/agility/V1/getQuestions", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getQuestions() {
 
@@ -93,7 +93,7 @@ public class AgilityController {
         return findService.findAllQuestions();
     }
 
-    @GetMapping( "/api/agility/V1/getQuestion/{tCode}")
+    @GetMapping( value = "/api/agility/V1/getQuestion/{tCode}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getQuestions(@PathVariable("tCode") String tCode) {
 
@@ -102,7 +102,7 @@ public class AgilityController {
         return findService.findQuestionsById(tCode);
     }
 
-    @GetMapping("/api/agility/V1/getAnswers")
+    @GetMapping(value = "/api/agility/V1/getAnswers", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getAnswers() {
 
@@ -111,7 +111,7 @@ public class AgilityController {
         return findService.findAllAnswers();
     }
 
-    @PostMapping("/api/agility/V1/saveUser")
+    @PostMapping(value = "/api/agility/V1/saveUser", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity saveUser(@Valid @RequestBody final AddUpdateUserRequest request) {
 
@@ -120,16 +120,13 @@ public class AgilityController {
         return addService.addUser(request);
     }
 
-//    @PostMapping(value = "/api/agility/V1/saveQuestion", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public Question saveQuestion(@RequestBody Question q) {
-//
-//        logger.info("saveQuestion entered...");
-//
-//        Question question = new Question();
-//        question = questionDao.save(question);
-//        return question;
-//    }
+    @PostMapping(value = "/api/agility/V1/saveQuestion", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Question saveQuestion(@RequestBody Question q) {
+
+        logger.info("saveQuestion entered...");
+        return null;
+    }
 
 
 

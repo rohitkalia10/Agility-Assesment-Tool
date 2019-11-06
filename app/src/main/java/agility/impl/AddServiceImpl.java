@@ -1,7 +1,9 @@
 package agility.impl;
 
+import agility.api.AddUpdateQuestionRequest;
 import agility.api.AddUpdateUserRequest;
 import agility.api.StatusMessage;
+import agility.data.model.Question;
 import agility.data.model.User;
 import agility.data.repository.AnswerDao;
 import agility.data.repository.QuestionDao;
@@ -17,6 +19,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import sun.awt.SunToolkit;
 
 import java.sql.*;
 import java.util.Optional;
@@ -34,10 +37,29 @@ public class AddServiceImpl implements AddService {
     private AnswerDao answerDao;
 
     @Override
+    public ResponseEntity addQuestion(AddUpdateQuestionRequest request) {
+        try{
+            String strQuestion = request.getQuestion();
+            Optional<Question> questionId = questionDao.findByQuestion(strQuestion);
+            String question = questionId.get().getQuestion();
+            if (question == null) {
+
+            } else
+                return new ResponseEntity("Question Already Exists", HttpStatus.OK);
+        } catch (AgilityException e) {
+            return new ResponseEntity(e.getStatusMessage().getMessage(),HttpStatus.BAD_REQUEST);
+
+        }
+        return new ResponseEntity("Question Saved", HttpStatus.OK );
+    }
+
+    @Override
     public ResponseEntity addUser(AddUpdateUserRequest request) {
 
         try {
-            String email = request.getEmail();
+            String strEmail = request.getEmail();
+            Optional<User> userId = userDao.findByEmail(strEmail);
+            String email = userId.get().getEmail();
             if (email == null ) {
 
                 User user = new User();
