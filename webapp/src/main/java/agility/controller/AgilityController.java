@@ -12,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +20,7 @@ import agility.services.FindService;
 
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -66,22 +64,36 @@ public class AgilityController {
         return new HttpEntity<String>(msg, headers);
     }
 
-    @GetMapping( value = "/api/agility/V1/getUser/{uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity getUser(@PathVariable("uid") String uid) {
+    @GetMapping( value= {"/api/agility/V1/getUser", "/api/agility/V1/getUser/{uid}"}, produces = MediaType.TEXT_HTML_VALUE)
+    public String getUser(Model model,@PathVariable("uid") String uid) {
 
         logger.info("getUser entered: uid= " + uid);
+        ResponseEntity listUser = new ResponseEntity(findService.findUserById(uid),HttpStatus.OK);
 
-        return findService.findUserById(uid);
+        model.addAttribute("listUser", listUser);
+
+        return "add-edit-user";
     }
 
-    @GetMapping( value = "/api/agility/V1/getUsers", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity getUsers() {
+    @PostMapping( value= {"/api/agility/V1/deleteUser/{uid}"}, produces = MediaType.TEXT_HTML_VALUE)
+    public String deleteUser(Model model,@PathVariable("uid") String uid) {
+
+        logger.info("deleteUser entered: uid= " + uid);
+        ResponseEntity listUser = new ResponseEntity(findService.findUserById(uid),HttpStatus.OK);
+        model.addAttribute("listUser", listUser);
+
+        return "add-edit-user";
+    }
+
+    @GetMapping( value = "/api/agility/V1/getUsers", produces = MediaType.TEXT_HTML_VALUE)
+    public String getUsers(Model model) {
 
         logger.info("findAll USERS entered...");
 
-        return findService.findAllUsers();
+        ResponseEntity listUsers = new ResponseEntity(findService.findAllUsers(),HttpStatus.OK);
+
+        model.addAttribute("listUsers", listUsers);
+         return "list-users";
     }
 
     @GetMapping(value = "/api/agility/V1/getQuestions", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -111,7 +123,7 @@ public class AgilityController {
         return findService.findAllAnswers();
     }
 
-    @PostMapping(value = "/api/agility/V1/saveUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/api/agility/V1/saveUser", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public ResponseEntity saveUser(@Valid @RequestBody final AddUpdateUserRequest request) {
 
